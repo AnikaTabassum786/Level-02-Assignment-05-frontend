@@ -87,7 +87,7 @@ const Navbar = ({
   ],
   auth = {
     login: { title: "Login", url: "/login" },
-    signup: { title: "Sign up", url: "#" },
+    signup: { title: "Sign up", url: "/signup" },
   },
   className,
 }: Navbar1Props) => {
@@ -118,10 +118,12 @@ const Navbar = ({
           </div>
           <div className="flex gap-2">
             {/* <Button variant="outline" size="sm" render={<a href={auth.login.url} />} nativeButton={false}>{auth.login.title}</Button> */}
-            <Button  variant="outline" size="sm">
-  <Link href="/login">Login</Link>
-</Button>
-            <Button size="sm" render={<a href={auth.signup.url} />} nativeButton={false}>{auth.signup.title}</Button>
+            <Button variant="outline" size="sm">
+              <Link href="/login">Login</Link>
+            </Button>
+             <Button variant="outline" size="sm">
+              <Link href="/signup">Sign up</Link>
+            </Button>
           </div>
         </nav>
 
@@ -161,10 +163,12 @@ const Navbar = ({
 
                   <div className="flex flex-col gap-3">
                     {/* <Button variant="outline" render={<a href={auth.login.url} />} nativeButton={false}>{auth.login.title}</Button> */}
-                    <Button  variant="outline" size="sm">
-  <Link href="/login">Login</Link>
-</Button>
-                    <Button render={<a href={auth.signup.url} />} nativeButton={false}>{auth.signup.title}</Button>
+                    <Button variant="outline" size="sm">
+                      <Link href="/login">Login</Link>
+                    </Button>
+                    <Button variant="outline" size="sm">
+              <Link href="/signup">Sign up</Link>
+            </Button>
                   </div>
                 </div>
               </SheetContent>

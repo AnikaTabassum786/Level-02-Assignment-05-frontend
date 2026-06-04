@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@base-ui/react"
 import Link from "next/link";
 
-const Login = () => {
+const Signup = () => {
   return (
     <>
       <section className="flex justify-center items-center mt-20">
@@ -21,16 +21,16 @@ const Login = () => {
           />
 
           <Button type="submit" className="w-full bg-black text-white cursor-pointer" variant="outline">
-            Login
+            Sign Up
           </Button>
 
 
         </div>
       </section>
 
-      <p className="flex justify-center mt-4">Need a account? <span className="underline mx-2 cursor-pointer"><Link href={'/signup'}>Sign up</Link></span></p>
+      <p className="flex justify-center mt-4">Already account? <span className="underline mx-2 cursor-pointer"><Link href={'/login'}>Login</Link></span></p>
     </>
   );
 };
 
-export default Login;
+export default Signup;
