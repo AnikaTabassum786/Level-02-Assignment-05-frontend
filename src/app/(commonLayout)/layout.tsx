@@ -3,11 +3,13 @@ import { Navbar } from "@/components/layout/Navbar";
 export default function CommonLayout({children}:{children:React.ReactNode}){
     return(
         <div>
-              <div>
-                  <Navbar/>
+              
+                 <div>
+                     <Navbar/>
+                 </div>
                  
-              </div>
-            {children}
+             
+            <div>{children}</div>
         </div>
     )
 }
