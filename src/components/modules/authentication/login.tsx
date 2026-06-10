@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
 import { Input } from "@base-ui/react";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 
 
@@ -26,8 +27,11 @@ const Login = () => {
 
       console.log(data);
        router.push("/");
+        toast.success("Login successful!");
+         
     } catch (error) {
-      console.error(error);
+      // console.error(error);
+      toast.error("Invalid email or password!");
     }
   };
 
