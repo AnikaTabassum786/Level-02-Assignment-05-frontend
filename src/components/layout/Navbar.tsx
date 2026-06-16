@@ -1,22 +1,202 @@
+
+
+
+
+// "use client";
+
+// import { Menu } from "lucide-react";
+// import { cn } from "@/lib/utils";
+
+// import {
+//   NavigationMenu,
+//   NavigationMenuItem,
+//   NavigationMenuLink,
+//   NavigationMenuList,
+// } from "@/components/ui/navigation-menu";
+
+// import {
+//   Sheet,
+//   SheetContent,
+//   SheetHeader,
+//   SheetTitle,
+//   SheetTrigger,
+// } from "@/components/ui/sheet";
+
+// import { Button } from "@/components/ui/button";
+// import Link from "next/link";
+// import { ModeToggle } from "./ModeToggle";
+// import { authClient } from "@/lib/auth-client";
+// import { toast } from "react-toastify";
+
+// interface MenuItem {
+//   title: string;
+//   url: string;
+// }
+
+// interface NavbarProps {
+//   className?: string;
+// }
+
+// const Navbar = ({ className }: NavbarProps) => {
+ 
+//   const { data: session } = authClient.useSession();
+
+//   // const role = session?.user?.role;
+//   const role = (session?.user as { role?: string })?.role;
+
+//   // ✅ Role-based menu
+//   const menu: MenuItem[] = [
+//     { title: "Home", url: "/" },
+
+//     // ...(role === "CUSTOMER"
+//     //   ? [
+//     //       { title: `Cart (${count})`, url: "/cart" },
+//     //       { title: "Order", url: "/orders" },
+//     //     ]
+//     //   : []),
+
+//     ...(role ? [{ title: "Dashboard", url: "/dashboard" }] : []),
+//   ];
+
+//   const handleLogout = async () => {
+//     try {
+//       await authClient.signOut();
+//       window.location.href = "/login";
+//       toast.success("Logout Successfully");
+//     } catch (error) {
+//       console.error("Logout failed:", error);
+//     }
+//   };
+
+//   return (
+//     <section className={cn("py-4 border-b", className)}>
+//       <div className="container mx-auto px-4">
+//         {/* ================= DESKTOP ================= */}
+//         <nav className="hidden items-center justify-between lg:flex">
+//           {/* Left */}
+//           <div className="flex items-center gap-6">
+//             <div className="flex items-center gap-2">
+//               {/* <GiMedicines size={30} /> */}
+//               <span className="text-lg font-semibold">MediNova</span>
+//             </div>
+
+//             <NavigationMenu>
+//               <NavigationMenuList>
+//                 {menu.map((item) => (
+//                   <NavigationMenuItem key={item.title}>
+//                     <NavigationMenuLink >
+//                       <Link
+//                         href={item.url}
+//                         className="px-4 py-2 text-sm font-medium rounded-md hover:bg-muted transition"
+//                       >
+//                         {item.title}
+//                       </Link>
+//                     </NavigationMenuLink>
+//                   </NavigationMenuItem>
+//                 ))}
+//               </NavigationMenuList>
+//             </NavigationMenu>
+//           </div>
+
+//           {/* Right */}
+//           <div className="flex items-center gap-3">
+//             <ModeToggle />
+
+//             {session ? (
+//               <div className="flex items-center gap-3">
+//                 <p className="text-sm text-muted-foreground">
+//                   {session.user.email}
+//                 </p>
+//                 <Button onClick={handleLogout} size="sm" className="cursor-pointer">
+//                   Sign Out
+//                 </Button>
+//               </div>
+//             ) : (
+//               <>
+//                 <Button  variant="outline" size="sm">
+//                   <Link href="/login">Login</Link>
+//                 </Button>
+//                 <Button size="sm">
+//                   <Link href="/signup">Sign Up</Link>
+//                 </Button>
+//               </>
+//             )}
+//           </div>
+//         </nav>
+
+//         {/* ================= MOBILE ================= */}
+//         <div className="lg:hidden flex items-center justify-between">
+//           <div className="flex items-center gap-2">
+//             {/* <GiMedicines size={28} /> */}
+//             <span className="font-semibold">MediNova</span>
+//           </div>
+
+//           <Sheet>
+//             <SheetTrigger >
+//               <Button size="icon" variant="outline">
+//                 <Menu className="w-4 h-4" />
+//               </Button>
+//             </SheetTrigger>
+
+//             <SheetContent>
+//               <SheetHeader>
+//                 <SheetTitle>MediNova</SheetTitle>
+//               </SheetHeader>
+
+//               <div className="flex flex-col gap-4 mt-6">
+//                 {menu.map((item) => (
+//                   <Link
+//                     key={item.title}
+//                     href={item.url}
+//                     className="text-base font-medium"
+//                   >
+//                     {item.title}
+//                   </Link>
+//                 ))}
+
+//                 <ModeToggle />
+
+//                 {session ? (
+//                   <>
+//                     <div>
+// <p className="text-sm text-muted-foreground">
+//                       {session.user.email}
+//                     </p>
+//                     <Button onClick={handleLogout} className="cursor-pointer">Sign Out</Button>
+//                     </div>
+//                   </>
+//                 ) : (
+//                   <>
+//                     <Button  variant="outline">
+//                       <Link href="/login">Login</Link>
+//                     </Button>
+//                     <Button  className="cursor-pointer">
+//                       <Link href="/signup">Sign Up</Link>
+//                     </Button>
+//                   </>
+//                 )}
+//               </div>
+//             </SheetContent>
+//           </Sheet>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// };
+
+// export { Navbar };
+
 "use client";
 
-import { Book, Menu, Sunset, Trees, Zap } from "lucide-react";
+import { Menu } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
-import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+
 import {
   Sheet,
   SheetContent,
@@ -24,232 +204,174 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { cn } from "@/lib/utils";
+
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ModeToggle } from "./ModeToggle";
+import { authClient } from "@/lib/auth-client";
+import { toast } from "react-toastify";
 
 interface MenuItem {
   title: string;
   url: string;
-  description?: string;
-  icon?: React.ReactNode;
-  items?: MenuItem[];
 }
 
-interface Navbar1Props {
+interface NavbarProps {
   className?: string;
-  logo?: {
-    url: string;
-    src: string;
-    alt: string;
-    title: string;
-    className?: string;
-  };
-  menu?: MenuItem[];
-  auth?: {
-    login: {
-      title: string;
-      url: string;
-    };
-    signup: {
-      title: string;
-      url: string;
-    };
-  };
 }
 
-const Navbar = ({
-  logo = {
-    url: "https://www.shadcnblocks.com",
-    src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg",
-    alt: "logo",
-    title: "Shadcnblocks.com",
-  },
-  menu = [
-    { title: "Home", url: "#" },
-    {
-      title: "Products",
-      url: "#",
+const Navbar = ({ className }: NavbarProps) => {
+  const { data: session } = authClient.useSession();
 
-    },
-    {
-      title: "Resources",
-      url: "#",
+  const role = (session?.user as { role?: string })?.role;
 
-    },
-    {
-      title: "Pricing",
-      url: "#",
-    },
-    {
-      title: "Blog",
-      url: "#",
-    },
-  ],
-  auth = {
-    login: { title: "Login", url: "/login" },
-    signup: { title: "Sign up", url: "/signup" },
-  },
-  className,
-}: Navbar1Props) => {
+  const menu: MenuItem[] = [
+    { title: "Home", url: "/" },
+    ...(role === "CUSTOMER"
+      ? [
+          { title: "Cart", url: "/cart" },
+          { title: "Order", url: "/orders" },
+        ]
+      : []),
+    ...(role ? [{ title: "Dashboard", url: "/dashboard" }] : []),
+  ];
+
+  const handleLogout = async () => {
+    try {
+      await authClient.signOut();
+      toast.success("Logout Successfully");
+      window.location.href = "/login";
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <section className={cn("py-4", className)}>
-      <div className="container mx-auto p-4">
-        {/* Desktop Menu */}
-        <nav className="hidden items-center justify-between lg:flex">
+    <section className={cn("py-4 border-b", className)}>
+      <div className="container mx-auto px-4">
+
+        {/* ================= DESKTOP ================= */}
+        <nav className="hidden lg:flex items-center justify-between">
+
+          {/* LEFT */}
           <div className="flex items-center gap-6">
-            {/* Logo */}
-            <a href={logo.url} className="flex items-center gap-2">
-              <img
-                src={logo.src}
-                className="max-h-8 dark:invert"
-                alt={logo.alt}
-              />
-              <span className="text-lg font-semibold tracking-tighter">
-                {logo.title}
-              </span>
-            </a>
-            <div className="flex items-center">
-              <NavigationMenu>
-                <NavigationMenuList>
-                  {menu.map((item) => renderMenuItem(item))}
-                </NavigationMenuList>
-              </NavigationMenu>
-            </div>
+            <span className="text-lg font-semibold">MediNova</span>
+
+            <NavigationMenu>
+              <NavigationMenuList className="flex gap-2">
+                {menu.map((item) => (
+                  <NavigationMenuItem key={item.title}>
+                    <Link
+                      href={item.url}
+                      className="px-4 py-2 text-sm font-medium rounded-md hover:bg-muted transition"
+                    >
+                      {item.title}
+                    </Link>
+                  </NavigationMenuItem>
+                ))}
+              </NavigationMenuList>
+            </NavigationMenu>
           </div>
-          <div className="flex gap-2">
-            {/* <Button variant="outline" size="sm" render={<a href={auth.login.url} />} nativeButton={false}>{auth.login.title}</Button> */}
 
-            <ModeToggle></ModeToggle>
-            <Button variant="outline" size="sm">
-              <Link href="/login">Login</Link>
-            </Button>
-            <Button variant="outline" size="sm">
-              <Link href="/signup">Sign up</Link>
-            </Button>
+          {/* RIGHT */}
+          <div className="flex items-center gap-3">
+            <ModeToggle />
 
+            {session ? (
+              <div className="flex items-center gap-3">
+                <p className="text-sm text-muted-foreground">
+                  {session.user.email}
+                </p>
+
+                <Button onClick={handleLogout} size="sm">
+                  Sign Out
+                </Button>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2">
+                <Link href="/login">
+                  <button className="px-3 py-1.5 border rounded-md text-sm hover:bg-muted">
+                    Login
+                  </button>
+                </Link>
+
+                <Link href="/signup">
+                  <button className="px-3 py-1.5 bg-black text-white rounded-md text-sm">
+                    Sign Up
+                  </button>
+                </Link>
+              </div>
+            )}
           </div>
         </nav>
 
-        {/* Mobile Menu */}
-        <div className="block lg:hidden">
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <a href={logo.url} className="flex items-center gap-2">
-              <img
-                src={logo.src}
-                className="max-h-8 dark:invert"
-                alt={logo.alt}
-              />
-            </a>
-            <Sheet>
-              <SheetTrigger render={<Button variant="outline" size="icon" />}><Menu className="size-4" /></SheetTrigger>
-              <SheetContent className="overflow-y-auto">
-                <SheetHeader>
-                  <SheetTitle>
-                    <a href={logo.url} className="flex items-center gap-2">
-                      <img
-                        src={logo.src}
-                        className="max-h-8 dark:invert"
-                        alt={logo.alt}
-                      />
-                    </a>
-                  </SheetTitle>
-                </SheetHeader>
-                <div className="flex flex-col gap-6 p-4">
-                  {/* <Accordion
-                    type="single"
-                    collapsible
-                    className="flex w-full flex-col gap-4"
-                  >
-                    {menu.map((item) => renderMobileMenuItem(item))}
-                  </Accordion> */}
+        {/* ================= MOBILE ================= */}
+        <div className="lg:hidden flex items-center justify-between">
 
-                  <div className="flex flex-col gap-3">
-                    {/* <Button variant="outline" render={<a href={auth.login.url} />} nativeButton={false}>{auth.login.title}</Button> */}
-                    <ModeToggle></ModeToggle>
-                    <Button variant="outline" size="sm">
-                      <Link href="/login">Login</Link>
-                    </Button>
-                    <Button variant="outline" size="sm">
-                      <Link href="/signup">Sign up</Link>
-                    </Button>
+          <span className="font-semibold">MediNova</span>
+
+          <Sheet>
+            <SheetTrigger>
+              <div className="p-2 border rounded-md">
+                <Menu className="w-4 h-4" />
+              </div>
+            </SheetTrigger>
+
+            <SheetContent>
+              <SheetHeader>
+                <SheetTitle>MediNova</SheetTitle>
+              </SheetHeader>
+
+              <div className="flex flex-col gap-4 mt-6">
+
+                {menu.map((item) => (
+                  <Link
+                    key={item.title}
+                    href={item.url}
+                    className="text-base font-medium"
+                  >
+                    {item.title}
+                  </Link>
+                ))}
+
+                <ModeToggle />
+
+                {session ? (
+                  <div className="flex flex-col gap-2">
+                    <p className="text-sm text-muted-foreground">
+                      {session.user.email}
+                    </p>
+
+                    <button
+                      onClick={handleLogout}
+                      className="px-3 py-2 bg-black text-white rounded-md"
+                    >
+                      Sign Out
+                    </button>
                   </div>
-                </div>
-              </SheetContent>
-            </Sheet>
-          </div>
+                ) : (
+                  <div className="flex flex-col gap-2">
+                    <Link href="/login">
+                      <button className="px-3 py-2 border rounded-md w-full">
+                        Login
+                      </button>
+                    </Link>
+
+                    <Link href="/signup">
+                      <button className="px-3 py-2 bg-black text-white rounded-md w-full">
+                        Sign Up
+                      </button>
+                    </Link>
+                  </div>
+                )}
+
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
+
       </div>
     </section>
-  );
-};
-
-const renderMenuItem = (item: MenuItem) => {
-  if (item.items) {
-    return (
-      <NavigationMenuItem key={item.title}>
-        <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
-        <NavigationMenuContent className="bg-popover text-popover-foreground">
-          {item.items.map((subItem) => (
-            <NavigationMenuLink key={subItem.title} className="w-80" render={<SubMenuLink item={subItem} />}></NavigationMenuLink>
-          ))}
-        </NavigationMenuContent>
-      </NavigationMenuItem>
-    );
-  }
-
-  return (
-    <NavigationMenuItem key={item.title}>
-      <NavigationMenuLink
-        href={item.url}
-        className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-accent-foreground"
-      >
-        {item.title}
-      </NavigationMenuLink>
-    </NavigationMenuItem>
-  );
-};
-
-const renderMobileMenuItem = (item: MenuItem) => {
-  if (item.items) {
-    return (
-      <AccordionItem key={item.title} value={item.title} className="border-b-0">
-        <AccordionTrigger className="text-md py-0 font-semibold hover:no-underline">
-          {item.title}
-        </AccordionTrigger>
-        <AccordionContent className="mt-2">
-          {item.items.map((subItem) => (
-            <SubMenuLink key={subItem.title} item={subItem} />
-          ))}
-        </AccordionContent>
-      </AccordionItem>
-    );
-  }
-
-  return (
-    <a key={item.title} href={item.url} className="text-md font-semibold">
-      {item.title}
-    </a>
-  );
-};
-
-const SubMenuLink = ({ item }: { item: MenuItem }) => {
-  return (
-    <a
-      className="flex min-w-80 flex-row gap-4 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-muted hover:text-accent-foreground"
-      href={item.url}
-    >
-      <div className="text-foreground">{item.icon}</div>
-      <div>
-        <div className="text-sm font-semibold">{item.title}</div>
-        {item.description && (
-          <p className="text-sm leading-snug text-muted-foreground">
-            {item.description}
-          </p>
-        )}
-      </div>
-    </a>
   );
 };
 
