@@ -6,7 +6,7 @@ import { Roles } from "./components/constant/roles";
 const roleDashboardMap = {
   [Roles.admin]: "/admin-dashboard",
   [Roles.seller]: "/seller-dashboard",
-  [Roles.customer]: "/dashboard",
+  [Roles.customer]: "/customer-dashboard",
 };
 
 export async function proxy(request: NextRequest) {
@@ -14,10 +14,9 @@ export async function proxy(request: NextRequest) {
     const pathname = request.nextUrl.pathname;
     const { data } = await userService.getSession()
     
-//   console.log(data,"from proxy")
-    // if (!data) {
-    //     return NextResponse.redirect(new URL("/login", request.url))
-    // }
+    if (!data) {
+        return NextResponse.redirect(new URL("/login", request.url))
+    }
 
     const role = data.user.role
 
@@ -40,6 +39,7 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ["/admin/:path*", "/seller/:path*", "/customer/:path*"]
+    // matcher: ["/admin/:path*", "/seller/:path*", "/customer/:path*"]
+    matcher: ["/customer-dashboard/:path*", "/admin-dashboard/:path*", "/seller-dashboard/:path*"]
 }
 
