@@ -1,6 +1,7 @@
 "use client"
 
 import { banUser } from "@/action/user.action";
+import CustomPagination from "@/components/shared/CustomPagination";
 import {
   Table,
   TableBody,
@@ -13,6 +14,11 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { toast } from "react-toastify";
 
+type Props = {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+};
 
 type User = {
   id: string;
@@ -34,6 +40,7 @@ export default function AllUsersClient({ users }: { users: User[] }) {
 
   //converting users coming from the server into local state. so that the UI can be updated without a reload.
   const [userList, setUserList] = useState(users);
+
 
   const handleBan = (userId: string) => {
     startTransition(async () => { //startTransition is a low-priority task.Proceed without freezing the UI.
@@ -59,6 +66,20 @@ export default function AllUsersClient({ users }: { users: User[] }) {
     });
   }
 
+const [currentPage, setCurrentPage] = useState(1);
+const usersPerPage = 1;
+
+//pagination logic
+
+const start = (currentPage - 1) * usersPerPage;
+
+const paginatedUsers = userList.slice(
+  start,
+  start + usersPerPage
+);
+
+const totalPages = Math.ceil(userList.length / usersPerPage);
+
   return (
     <div className="p-2 md:p-4 lg:p-6">
       <Table>
@@ -76,7 +97,7 @@ export default function AllUsersClient({ users }: { users: User[] }) {
         </TableHeader>
 
         <TableBody>
-          {userList?.map((user,index) => (
+          {paginatedUsers?.map((user,index) => (
             <TableRow key={user.id}>
               <TableCell className="text-center">{index + 1}</TableCell>
               <TableCell className="text-center">{user.name}</TableCell>
@@ -101,6 +122,16 @@ export default function AllUsersClient({ users }: { users: User[] }) {
           ))}
         </TableBody>
       </Table>
+
+       <div className="mt-4 flex justify-end">
+                <CustomPagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={setCurrentPage}
+                />
+            </div>
     </div>
   );
 }
+
+
