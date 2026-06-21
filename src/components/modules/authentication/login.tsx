@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { useState } from "react";
@@ -8,6 +10,8 @@ import { authClient } from "@/lib/auth-client";
 import { Input } from "@base-ui/react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { error } from "console";
+import { any } from "zod";
 
 
 
@@ -16,24 +20,69 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  // const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
 
-    try {
-      const data = await authClient.signIn.email({
-        email,
-        password,
-      });
+  //   try {
+  //     const data = await authClient.signIn.email({
+  //       email,
+  //       password,
+  //     });
 
-      console.log(data);
-       router.push("/");
-        toast.success("Login successful!");
-         
-    } catch (error) {
-      // console.error(error);
-      toast.error("Invalid email or password!");
+  //     console.log(data);
+
+       
+  //     toast.success("Login successful!");
+  //     router.push("/");
+
+ 
+  //   } catch (error) {
+  //     if(data.error){
+  //       const message = data.error.message
+
+  //       if (message.includes("banned") || code === "ACCOUNT_BANNED") {
+  //     toast.error("Your account is banned. Contact support.");
+  //     return;
+  //   }
+  //     }
+      
+  //     toast.error("Invalid email or password!");
+  //   }
+  // };
+
+
+const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+
+  const data = await authClient.signIn.email({
+    email,
+    password,
+  });
+
+  console.log(data);
+
+ 
+  if (data.error) {
+    const message = data.error.message || "";
+  
+
+    if (message.includes("banned") ) {
+      toast.error("Your account is banned.");
+      return;
     }
-  };
+
+    if (message.includes("deleted") ) {
+      toast.error("Your account was deleted.");
+      return;
+    }
+
+    toast.error(data.error.message || "Invalid email or password!");
+    return;
+  }
+
+  toast.success("Login successful!");
+  router.push("/");
+};
 
   return (
     <>
