@@ -5,17 +5,17 @@ export const adminRoute:Route[]= [
     {
       title: "Admin  Dashboard",
       items: [
-        {
-          title: "All Users",
-          url: "/admin-dashboard/all-users",
-        },
+        // {
+        //   title: "All Users",
+        //   url: "/admin-dashboard/all-users",
+        // },
         {
           title: "All Medicines",
           url: "/admin-dashboard/all-medicines",
         },
         {
           title: "All Categories",
-          url: "/admin-dashboard/categories",
+          url: "/admin-dashboard/all-categories",
         },
         {
           title: "Add Category",

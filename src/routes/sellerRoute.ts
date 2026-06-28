@@ -15,7 +15,7 @@ export const sellerRoute:Route[]= [
         },
         {
           title: "All Categories",
-          url: "/admin-dashboard/categories",
+          url: "/admin-dashboard/all-categories",
         },
         {
           title: "Add Category",
