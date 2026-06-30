@@ -11,17 +11,17 @@ export default function ALLCategoriesClient({
     categories,
 }: IAllCategoriesClientProps) {
 
-  const router = useRouter()
-  const handleDelete  = async(id:string)=>{
+    const router = useRouter()
 
-   const res = await deleteCategory(id);
+    const handleDelete = async (id: string) => {
+        const res = await deleteCategory(id);
 
-    if (res.success) {
-      toast.success(res.message);
-      router.refresh()
-    } else {
-      toast.error(res.message);
-    }
+        if (res.success) {
+            toast.success(res.message);
+            router.refresh()
+        } else {
+            toast.error(res.message);
+        }
     }
     return (
         <>
@@ -39,7 +39,7 @@ export default function ALLCategoriesClient({
                         <TableRow key={category.id}>
                             <TableCell className="text-center">{index + 1}</TableCell>
                             <TableCell className="text-center">{category.name}</TableCell>
-                            <TableCell className="text-center"><Button className="cursor-pointer" onClick={()=>handleDelete(category.id)}>Delete</Button></TableCell>
+                            <TableCell className="text-center"><Button className="cursor-pointer" onClick={() => handleDelete(category.id)}>Delete</Button></TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
