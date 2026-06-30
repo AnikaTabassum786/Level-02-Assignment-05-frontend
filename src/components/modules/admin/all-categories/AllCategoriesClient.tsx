@@ -1,10 +1,28 @@
+'use client'
+
 import { Table, TableBody, TableHead, TableHeader, TableRow, TableCell } from "@/components/ui/table";
 import { IAllCategoriesClientProps } from "./categories.interface";
 import { Button } from "@/components/ui/button";
+import { deleteCategory } from "@/action/category.action";
+import { toast } from "react-toastify";
+import { useRouter } from 'next/navigation'
 
 export default function ALLCategoriesClient({
     categories,
 }: IAllCategoriesClientProps) {
+
+  const router = useRouter()
+  const handleDelete  = async(id:string)=>{
+
+   const res = await deleteCategory(id);
+
+    if (res.success) {
+      toast.success(res.message);
+      router.refresh()
+    } else {
+      toast.error(res.message);
+    }
+    }
     return (
         <>
             <Table>
@@ -21,7 +39,7 @@ export default function ALLCategoriesClient({
                         <TableRow key={category.id}>
                             <TableCell className="text-center">{index + 1}</TableCell>
                             <TableCell className="text-center">{category.name}</TableCell>
-                            <TableCell className="text-center"><Button className="cursor-pointer">Delete</Button></TableCell>
+                            <TableCell className="text-center"><Button className="cursor-pointer" onClick={()=>handleDelete(category.id)}>Delete</Button></TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
