@@ -3,8 +3,7 @@
 import { Table, TableBody, TableHead, TableHeader, TableRow, TableCell } from "@/components/ui/table";
 import Image from "next/image";
 
-
-
+//Here, 'Medicine' represents the shape or structure of an object. in other words, the properties that a 'Medicine' object will possess have been defined.
 
 type Medicine = {
     id: string;
@@ -15,8 +14,12 @@ type Medicine = {
     imageURL: string | null;
 };
 
+//Medicine[] is an array of multiple objects of the 'Medicine' type.
+//Medicine ➜ Design of a medicine object.
+//Medicine[] ➜ A list (array) of multiple medicine objects.
+
 export default function AllMedicineClient({ medicines }: {
-    medicines: Medicine[];
+    medicines: Medicine[]; 
 }) {
 
 
